@@ -1,0 +1,40 @@
+<div class="container">
+  @if (loading()) {
+    <div class="loading">Carregando...</div>
+  }
+
+  @if (!loading() && employee()) {
+    <div class="detail-card">
+      <h1>Detalhes do Funcionário</h1>
+      
+      <div class="detail-row">
+        <span class="label">ID:</span>
+        <span class="value">{{ employee()!.id }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Nome:</span>
+        <span class="value">{{ employee()!.employee_name }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Salário:</span>
+        <span class="value">{{ employee()!.employee_salary | currency:'BRL' }}</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="label">Idade:</span>
+        <span class="value">{{ employee()!.employee_age }} anos</span>
+      </div>
+
+      <div class="actions">
+        <a [routerLink]="['/employee/edit', employee()!.id]" class="btn btn-warning">Editar</a>
+        <button (click)="goBack()" class="btn btn-secondary">Voltar</button>
+      </div>
+    </div>
+  }
+
+  @if (!loading() && !employee()) {
+    <div class="error">Funcionário não encontrado</div>
+  }
+</div>
